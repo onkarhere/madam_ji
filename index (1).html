@@ -1,0 +1,2129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Happy Birthday HIMU 🎉</title>
+<style>
+/* =============================================
+   GLOBAL STYLES & FONTS
+   ============================================= */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&family=Caveat:wght@500;600;700&display=swap');
+
+:root {
+  --pink: #FFB3C6;
+  --purple: #C8B8FF;
+  --yellow: #FFE082;
+  --mint: #B8F0DC;
+  --peach: #FFCBA4;
+  --blue: #B3D9FF;
+  --coral: #FF8B8B;
+  --lavender: #E8D5FF;
+  --bg-grad: linear-gradient(135deg, #FFE4F0 0%, #E8D5FF 30%, #D5EEFF 60%, #D5FFE8 100%);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--bg-grad);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+h1, h2, h3 { font-family: 'Fredoka One', cursive; }
+
+/* =============================================
+   SCREEN SYSTEM
+   ============================================= */
+.screen {
+  display: none;
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+.screen.active { display: flex; }
+
+/* =============================================
+   WELCOME SCREEN
+   ============================================= */
+#screen-welcome {
+  background: var(--bg-grad);
+  text-align: center;
+}
+
+.panda-mascot {
+  font-size: clamp(70px, 18vw, 120px);
+  animation: bounce 1.2s ease-in-out infinite;
+  display: block;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+.main-title {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(2rem, 8vw, 4.5rem);
+  background: linear-gradient(135deg, #FF6B9D, #A855F7, #3B82F6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 10px 0 20px;
+  line-height: 1.2;
+  text-shadow: none;
+  filter: drop-shadow(2px 3px 0px rgba(168,85,247,0.25));
+}
+
+.subtitle {
+  font-size: clamp(1rem, 4vw, 1.4rem);
+  color: #9B59B6;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.floating-decor {
+  position: absolute;
+  font-size: clamp(20px, 5vw, 36px);
+  animation: float-decor 4s ease-in-out infinite;
+  pointer-events: none;
+  user-select: none;
+}
+
+@keyframes float-decor {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(15deg); }
+}
+
+/* =============================================
+   BUTTONS
+   ============================================= */
+.btn {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(1rem, 4vw, 1.3rem);
+  padding: 14px 36px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+}
+.btn:active { transform: scale(0.94); }
+
+.btn-primary {
+  background: linear-gradient(135deg, #FF6B9D, #A855F7);
+  color: white;
+  box-shadow: 0 6px 20px rgba(168,85,247,0.35);
+}
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(168,85,247,0.45); }
+
+.btn-success {
+  background: linear-gradient(135deg, #22C55E, #10B981);
+  color: white;
+  box-shadow: 0 6px 20px rgba(34,197,94,0.35);
+}
+
+.game-card {
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  padding: clamp(18px, 5vw, 32px);
+  box-shadow: 0 8px 32px rgba(168,85,247,0.18);
+  border: 2px solid rgba(255,255,255,0.9);
+  width: 100%;
+  max-width: 520px;
+  text-align: center;
+}
+
+.game-title {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(1.5rem, 6vw, 2.2rem);
+  background: linear-gradient(135deg, #FF6B9D, #A855F7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+}
+
+.game-desc {
+  color: #7B5EA7;
+  font-size: clamp(0.9rem, 3vw, 1.05rem);
+  margin-bottom: 18px;
+  font-weight: 600;
+}
+
+.counter {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(1rem, 4vw, 1.3rem);
+  color: #A855F7;
+  margin: 12px 0;
+  background: rgba(168,85,247,0.1);
+  border-radius: 50px;
+  padding: 6px 20px;
+  display: inline-block;
+}
+
+/* =============================================
+   STAGE PROGRESS BAR
+   ============================================= */
+.progress-bar-wrap {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 6px;
+  background: rgba(255,255,255,0.4);
+  z-index: 1000;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #FF6B9D, #A855F7, #3B82F6);
+  transition: width 0.5s ease;
+  border-radius: 0 3px 3px 0;
+}
+
+/* =============================================
+   GAME 1: BUTTERFLY CATCH
+   ============================================= */
+#screen-butterfly {
+  background: linear-gradient(135deg, #E0F7FA 0%, #F3E5F5 50%, #E8F5E9 100%);
+}
+
+#butterfly-arena {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  height: 340px;
+  background: rgba(255,255,255,0.4);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 2px solid rgba(255,255,255,0.8);
+  margin: 16px 0;
+  cursor: crosshair;
+}
+
+.butterfly {
+  position: absolute;
+  font-size: clamp(28px, 7vw, 42px);
+  cursor: pointer;
+  user-select: none;
+  animation: flutter 0.4s ease-in-out infinite alternate;
+  transition: transform 0.1s;
+  will-change: transform;
+}
+.butterfly:active { transform: scale(0.5) !important; }
+
+@keyframes flutter {
+  0% { transform: scaleX(1) rotate(-8deg); }
+  100% { transform: scaleX(0.7) rotate(8deg); }
+}
+
+.catch-flash {
+  position: absolute;
+  font-size: 28px;
+  pointer-events: none;
+  animation: pop-out 0.6s ease-out forwards;
+}
+@keyframes pop-out {
+  0% { transform: scale(0) translateY(0); opacity: 1; }
+  60% { transform: scale(1.4) translateY(-20px); opacity: 1; }
+  100% { transform: scale(0.8) translateY(-40px); opacity: 0; }
+}
+
+/* =============================================
+   GAME 2: POP BALLOONS
+   ============================================= */
+#screen-balloon {
+  background: linear-gradient(135deg, #FFF3E0 0%, #FCE4EC 50%, #F3E5F5 100%);
+}
+
+#balloon-arena {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  height: 360px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.35);
+  border: 2px solid rgba(255,255,255,0.8);
+  margin: 14px 0;
+}
+
+.balloon {
+  position: absolute;
+  font-size: clamp(32px, 8vw, 48px);
+  cursor: pointer;
+  user-select: none;
+  animation: rise linear forwards;
+  will-change: transform;
+}
+
+@keyframes rise {
+  0% { bottom: -60px; }
+  100% { bottom: 110%; }
+}
+
+.balloon-pop {
+  position: absolute;
+  font-size: 26px;
+  pointer-events: none;
+  animation: explode 0.7s ease-out forwards;
+}
+@keyframes explode {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(2.2); opacity: 0.8; }
+  100% { transform: scale(0); opacity: 0; }
+}
+
+/* =============================================
+   GAME 3: BIRTHDAY CAKE + CANDLES
+   ============================================= */
+#screen-cake {
+  background: linear-gradient(135deg, #FFF9E6 0%, #FFE4F0 50%, #E8D5FF 100%);
+}
+
+.cake-display {
+  font-size: clamp(80px, 20vw, 140px);
+  line-height: 1;
+  margin: 10px 0;
+  filter: drop-shadow(0 8px 16px rgba(255,107,157,0.3));
+  transition: transform 0.5s;
+}
+
+.candles-row {
+  display: flex;
+  gap: clamp(8px, 3vw, 18px);
+  justify-content: center;
+  margin: 18px 0;
+  flex-wrap: wrap;
+}
+
+.candle {
+  font-size: clamp(32px, 8vw, 52px);
+  cursor: default;
+  transition: all 0.4s ease;
+  animation: flicker 0.6s ease-in-out infinite alternate;
+  filter: drop-shadow(0 0 8px #FFD700);
+}
+.candle.out {
+  filter: none;
+  animation: none;
+  transform: scale(0.85);
+}
+
+@keyframes flicker {
+  0% { transform: scale(1) rotate(-3deg); filter: drop-shadow(0 0 6px #FFD700); }
+  100% { transform: scale(1.05) rotate(3deg); filter: drop-shadow(0 0 14px #FF8C00); }
+}
+
+/* =============================================
+   GAME 4: MYSTERY GIFTS (UPGRADED)
+   ============================================= */
+#screen-gifts {
+  background: linear-gradient(135deg, #FFF0F8 0%, #FFF9C4 40%, #E8F5FF 100%);
+}
+
+.gifts-stage-label {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(0.85rem, 3vw, 1rem);
+  color: #B07FD4;
+  margin-bottom: 6px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.gifts-grid {
+  display: flex;
+  gap: clamp(10px, 3vw, 20px);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 14px 0;
+}
+
+/* Each gift is a card with ribbon + box */
+.gift-card {
+  position: relative;
+  width: clamp(72px, 18vw, 96px);
+  height: clamp(72px, 18vw, 96px);
+  cursor: pointer;
+  user-select: none;
+  perspective: 600px;
+}
+
+.gift-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-style: preserve-3d;
+}
+
+.gift-card:not(.opened):hover .gift-inner {
+  transform: scale(1.12) rotate(-4deg);
+}
+
+.gift-front, .gift-back {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(38px, 10vw, 56px);
+  backface-visibility: hidden;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+
+.gift-back {
+  transform: rotateY(180deg);
+  font-size: clamp(32px, 9vw, 48px);
+}
+
+.gift-card.opened .gift-inner {
+  transform: rotateY(180deg) scale(1.05);
+}
+
+/* Colour themes per gift */
+.gift-card:nth-child(1) .gift-front { background: linear-gradient(135deg, #FFB3C6, #FF6B9D); }
+.gift-card:nth-child(2) .gift-front { background: linear-gradient(135deg, #C8B8FF, #A855F7); }
+.gift-card:nth-child(3) .gift-front { background: linear-gradient(135deg, #B8F0DC, #22C55E); }
+.gift-card:nth-child(4) .gift-front { background: linear-gradient(135deg, #FFE082, #F59E0B); }
+.gift-card:nth-child(5) .gift-front { background: linear-gradient(135deg, #B3D9FF, #3B82F6); }
+.gift-card:nth-child(1) .gift-back  { background: linear-gradient(135deg, #FFD6E0, #FFB3C6); }
+.gift-card:nth-child(2) .gift-back  { background: linear-gradient(135deg, #E0D5FF, #C8B8FF); }
+.gift-card:nth-child(3) .gift-back  { background: linear-gradient(135deg, #D5F5E8, #B8F0DC); }
+.gift-card:nth-child(4) .gift-back  { background: linear-gradient(135deg, #FFF5CC, #FFE082); }
+.gift-card:nth-child(5) .gift-back  { background: linear-gradient(135deg, #D5EEFF, #B3D9FF); }
+
+/* Shake animation for "try me" hint */
+@keyframes gift-shake {
+  0%, 100% { transform: rotate(0deg); }
+  15% { transform: rotate(-8deg) scale(1.05); }
+  30% { transform: rotate(8deg) scale(1.05); }
+  45% { transform: rotate(-5deg); }
+  60% { transform: rotate(5deg); }
+  75% { transform: rotate(-2deg); }
+}
+
+.gift-card.shaking .gift-inner { animation: gift-shake 0.6s ease-in-out; }
+
+/* Golden gift special glow */
+.gift-card.golden .gift-front {
+  background: linear-gradient(135deg, #FFD700, #FF8C00);
+  box-shadow: 0 0 20px rgba(255,215,0,0.6), 0 6px 20px rgba(0,0,0,0.15);
+  animation: golden-pulse 1.2s ease-in-out infinite alternate;
+}
+@keyframes golden-pulse {
+  0% { box-shadow: 0 0 15px rgba(255,215,0,0.5), 0 6px 20px rgba(0,0,0,0.12); }
+  100% { box-shadow: 0 0 35px rgba(255,215,0,0.85), 0 8px 28px rgba(0,0,0,0.15); }
+}
+
+/* Sparkle particles on gift open */
+.gift-sparkle {
+  position: fixed;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 600;
+  animation: sparkle-fly 0.9s ease-out forwards;
+}
+@keyframes sparkle-fly {
+  0%   { transform: translate(0,0) scale(1); opacity: 1; }
+  100% { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
+}
+
+/* Gift progress dots */
+.gift-dots {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin: 8px 0 4px;
+}
+.gift-dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: rgba(168,85,247,0.2);
+  border: 2px solid rgba(168,85,247,0.3);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.gift-dot.filled {
+  background: linear-gradient(135deg, #FF6B9D, #A855F7);
+  border-color: transparent;
+  transform: scale(1.3);
+}
+
+/* Gift reveal popup — upgraded */
+.gift-reveal {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) scale(0) rotate(-6deg);
+  background: white;
+  color: #5B3A8E;
+  padding: 28px 32px;
+  border-radius: 28px;
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(1rem, 3.5vw, 1.3rem);
+  text-align: center;
+  max-width: 300px;
+  width: 88vw;
+  z-index: 500;
+  box-shadow: 0 20px 60px rgba(168,85,247,0.35);
+  border: 3px solid #E8D5FF;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.gift-reveal.visible { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+
+.gift-reveal-emoji {
+  font-size: clamp(50px, 14vw, 72px);
+  display: block;
+  margin-bottom: 10px;
+  animation: reveal-bounce 0.5s ease-out 0.3s both;
+}
+@keyframes reveal-bounce {
+  0% { transform: scale(0) rotate(-20deg); }
+  60% { transform: scale(1.3) rotate(5deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+.gift-reveal-msg {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  color: #7B5EA7;
+  font-size: clamp(0.9rem, 3vw, 1.05rem);
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+
+.gift-hint {
+  font-size: 0.8rem;
+  color: #B07FD4;
+  margin-top: 6px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 600;
+}
+
+/* =============================================
+   GAME 5 (was 6): SECRET LETTERS
+   ============================================= */
+#screen-letters {
+  background: linear-gradient(135deg, #FFF8E1 0%, #FFE4F0 50%, #E8EEFF 100%);
+}
+
+#letters-arena {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  height: 320px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.35);
+  border: 2px solid rgba(255,255,255,0.8);
+  margin: 14px 0;
+  overflow: hidden;
+}
+
+.envelope {
+  position: absolute;
+  font-size: clamp(36px, 9vw, 54px);
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.2s;
+  animation: float-envelope 3s ease-in-out infinite;
+}
+.envelope:hover { transform: scale(1.2) rotate(8deg); }
+.envelope.opened { animation: none; transform: scale(0.7); opacity: 0.4; pointer-events: none; }
+
+@keyframes float-envelope {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  50% { transform: translateY(-10px) rotate(5deg); }
+}
+
+.letter-popup {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) scale(0) rotate(-5deg);
+  background: linear-gradient(145deg, #fff9c4, #ffeaa7);
+  border: 3px solid #FFD700;
+  color: #7B5EA7;
+  padding: 22px 28px;
+  border-radius: 20px;
+  font-size: clamp(0.95rem, 3.5vw, 1.2rem);
+  text-align: center;
+  max-width: 300px;
+  z-index: 500;
+  font-weight: 700;
+  box-shadow: 0 10px 30px rgba(255,215,0,0.4);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.letter-popup.visible { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+
+/* =============================================
+   GAME 7: SPIN THE WHEEL
+   ============================================= */
+#screen-wheel {
+  background: linear-gradient(135deg, #F3E5F5 0%, #E3F2FD 50%, #E8F5E9 100%);
+}
+
+.wheel-wrap {
+  position: relative;
+  margin: 14px auto;
+  width: min(300px, 88vw);
+  height: min(300px, 88vw);
+}
+
+#spin-canvas {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow: 0 8px 30px rgba(168,85,247,0.35);
+}
+
+.wheel-pointer {
+  position: absolute;
+  top: -18px; left: 50%;
+  transform: translateX(-50%);
+  font-size: 36px;
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.3));
+  z-index: 5;
+}
+
+.wheel-result {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(1.1rem, 4vw, 1.5rem);
+  color: #A855F7;
+  margin: 14px 0;
+  min-height: 56px;
+  text-align: center;
+  background: rgba(168,85,247,0.1);
+  border-radius: 16px;
+  padding: 10px 20px;
+  line-height: 1.4;
+}
+
+/* =============================================
+   GAME 8: PANDA FEEDING
+   ============================================= */
+#screen-panda {
+  background: linear-gradient(135deg, #F1F8E9 0%, #FFF3E0 50%, #FCE4EC 100%);
+}
+
+.panda-feed-char {
+  font-size: clamp(70px, 18vw, 110px);
+  line-height: 1;
+  display: block;
+  transition: transform 0.3s;
+}
+.panda-feed-char.happy { animation: happy-dance 0.6s ease-in-out; }
+@keyframes happy-dance {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.2) rotate(-8deg); }
+  75% { transform: scale(1.2) rotate(8deg); }
+}
+
+.food-items {
+  display: flex;
+  gap: clamp(12px, 4vw, 24px);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 16px 0;
+}
+
+.food-item {
+  font-size: clamp(38px, 10vw, 58px);
+  cursor: pointer;
+  transition: transform 0.2s;
+  user-select: none;
+  animation: food-bob 2s ease-in-out infinite;
+}
+.food-item:nth-child(2) { animation-delay: 0.4s; }
+.food-item:nth-child(3) { animation-delay: 0.8s; }
+.food-item:nth-child(4) { animation-delay: 1.2s; }
+.food-item:hover { transform: scale(1.3) translateY(-5px); }
+.food-item.eaten { transform: scale(0); opacity: 0; pointer-events: none; transition: all 0.3s; }
+
+@keyframes food-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.hunger-bar-wrap {
+  width: 100%;
+  max-width: 300px;
+  height: 18px;
+  background: rgba(255,255,255,0.5);
+  border-radius: 50px;
+  margin: 12px auto;
+  border: 2px solid rgba(168,85,247,0.3);
+  overflow: hidden;
+}
+.hunger-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #FF6B9D, #A855F7);
+  border-radius: 50px;
+  transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* =============================================
+   VINTAGE LETTER SCREEN
+   ============================================= */
+#screen-letter {
+  background: linear-gradient(135deg, #f5efe0 0%, #ede0c4 50%, #f0e6cc 100%);
+  min-height: 100vh;
+  padding: 30px 16px;
+  justify-content: flex-start;
+  overflow-y: auto;
+}
+
+.letter-paper {
+  position: relative;
+  max-width: 560px;
+  width: 100%;
+  margin: 0 auto;
+  background: #fdf6e3;
+  border-radius: 4px 4px 4px 4px;
+  padding: clamp(28px, 7vw, 52px) clamp(24px, 6vw, 48px);
+  box-shadow:
+    0 4px 6px rgba(0,0,0,0.08),
+    0 12px 30px rgba(139,100,50,0.18),
+    inset 0 0 80px rgba(180,140,80,0.07);
+  /* Paper texture via repeating gradient lines */
+  background-image:
+    repeating-linear-gradient(
+      transparent,
+      transparent 27px,
+      rgba(180,160,100,0.18) 27px,
+      rgba(180,160,100,0.18) 28px
+    ),
+    linear-gradient(135deg, #fdf6e3 0%, #f7edd0 100%);
+  /* Torn/folded top edge */
+  border-top: none;
+}
+
+/* Aged paper corner fold */
+.letter-paper::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 0; height: 0;
+  border-style: solid;
+  border-width: 0 40px 40px 0;
+  border-color: transparent #ede0c4 transparent transparent;
+  filter: drop-shadow(-2px 2px 2px rgba(0,0,0,0.12));
+}
+.letter-paper::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 40px; height: 40px;
+  background: linear-gradient(225deg, #d4c090 0%, #c9b080 100%);
+  clip-path: polygon(100% 0, 100% 100%, 0 0);
+}
+
+/* Red margin line */
+.letter-margin-line {
+  position: absolute;
+  left: clamp(48px, 12vw, 72px);
+  top: 0; bottom: 0;
+  width: 1px;
+  background: rgba(220,100,100,0.3);
+  pointer-events: none;
+}
+
+.letter-stamp {
+  position: absolute;
+  top: 14px; right: 56px;
+  font-size: clamp(28px, 7vw, 38px);
+  opacity: 0.85;
+  transform: rotate(6deg);
+  filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
+}
+
+.letter-postmark {
+  position: absolute;
+  top: 12px; right: 50px;
+  width: 60px; height: 60px;
+  border: 2px solid rgba(139,80,40,0.35);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 7px;
+  color: rgba(139,80,40,0.5);
+  font-family: 'Courier New', monospace;
+  letter-spacing: 1px;
+  text-align: center;
+  transform: rotate(-12deg);
+  line-height: 1.3;
+  font-weight: 700;
+}
+
+.letter-divider {
+  text-align: center;
+  color: rgba(160,120,60,0.55);
+  font-size: 0.85rem;
+  letter-spacing: 4px;
+  margin: 12px 0;
+  font-family: 'Courier New', monospace;
+}
+
+.letter-heading {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(1.4rem, 5vw, 2rem);
+  color: #6B4C1E;
+  text-align: center;
+  margin-bottom: 4px;
+  letter-spacing: 0.5px;
+}
+
+.letter-body {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(1rem, 3.2vw, 1.15rem);
+  color: #3A2510;
+  line-height: 2;
+  font-weight: 500;
+  word-break: break-word;
+}
+
+.letter-body p {
+  margin-bottom: 14px;
+}
+
+.letter-sign {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(1.1rem, 4vw, 1.35rem);
+  color: #6B3F10;
+  text-align: right;
+  margin-top: 24px;
+  line-height: 1.7;
+  font-weight: 600;
+}
+
+.letter-wax-seal {
+  display: block;
+  font-size: clamp(40px, 10vw, 56px);
+  text-align: center;
+  margin: 16px 0 8px;
+  filter: drop-shadow(0 3px 6px rgba(180,80,40,0.35));
+  animation: seal-wobble 3s ease-in-out infinite;
+}
+@keyframes seal-wobble {
+  0%, 100% { transform: rotate(-3deg) scale(1); }
+  50% { transform: rotate(3deg) scale(1.06); }
+}
+
+.letter-flowers {
+  position: absolute;
+  font-size: clamp(18px, 4vw, 26px);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.letter-continue-btn {
+  display: block;
+  margin: 24px auto 8px;
+}
+
+/* =============================================
+   FINAL CELEBRATION SCREEN (REDESIGNED)
+   ============================================= */
+#screen-final {
+  background: radial-gradient(ellipse at 50% 30%, #2a0a4a 0%, #0f0a2e 55%, #0a1a0a 100%);
+  overflow: hidden;
+  padding: 0;
+}
+
+#fireworks-canvas {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.final-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 30px 20px;
+  width: 100%;
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+/* Floating star sparkles behind title */
+.final-star {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+  animation: star-twinkle ease-in-out infinite alternate;
+}
+@keyframes star-twinkle {
+  0%   { opacity: 0.2; transform: scale(0.7); }
+  100% { opacity: 1;   transform: scale(1.3); }
+}
+
+.final-panda {
+  font-size: clamp(60px, 16vw, 90px);
+  display: block;
+  line-height: 1;
+  margin-bottom: 6px;
+  animation: panda-celebrate 1s ease-in-out infinite alternate;
+  filter: drop-shadow(0 0 20px rgba(255,107,157,0.6));
+}
+@keyframes panda-celebrate {
+  0%   { transform: translateY(0) rotate(-6deg) scale(1); }
+  100% { transform: translateY(-12px) rotate(6deg) scale(1.08); }
+}
+
+.final-title {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(2.2rem, 9vw, 4.8rem);
+  line-height: 1.15;
+  background: linear-gradient(135deg, #FFD6E8 0%, #FFB3C6 30%, #E8D5FF 60%, #B3D9FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 18px rgba(255,107,157,0.5));
+  animation: title-shimmer 3s ease-in-out infinite alternate;
+  margin: 8px 0 16px;
+}
+@keyframes title-shimmer {
+  0%   { filter: drop-shadow(0 0 14px rgba(255,107,157,0.4)); }
+  100% { filter: drop-shadow(0 0 28px rgba(168,85,247,0.7)) drop-shadow(0 0 50px rgba(59,130,246,0.3)); }
+}
+
+.final-card {
+  background: rgba(255,255,255,0.07);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 24px;
+  padding: clamp(18px, 5vw, 28px);
+  margin: 14px 0;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+.final-wish {
+  color: rgba(255,220,240,0.9);
+  font-size: clamp(0.9rem, 3vw, 1.08rem);
+  font-weight: 600;
+  line-height: 1.75;
+  margin: 0;
+}
+
+.final-emoji-row {
+  display: flex;
+  justify-content: center;
+  gap: clamp(8px, 3vw, 18px);
+  margin: 18px 0;
+  font-size: clamp(28px, 7vw, 42px);
+}
+
+.final-emoji-row span {
+  display: inline-block;
+  animation: float-final 2.5s ease-in-out infinite;
+}
+.final-emoji-row span:nth-child(1) { animation-delay: 0s; }
+.final-emoji-row span:nth-child(2) { animation-delay: 0.4s; }
+.final-emoji-row span:nth-child(3) { animation-delay: 0.8s; }
+.final-emoji-row span:nth-child(4) { animation-delay: 1.2s; }
+.final-emoji-row span:nth-child(5) { animation-delay: 1.6s; }
+
+@keyframes float-final {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+
+.final-replay {
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.9);
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(0.95rem, 3.5vw, 1.15rem);
+  padding: 12px 32px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  margin-top: 10px;
+  backdrop-filter: blur(4px);
+}
+.final-replay:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); }
+.final-replay:active { transform: scale(0.95); }
+
+.confetti-piece {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 999;
+  animation: confetti-fall linear forwards;
+}
+
+@keyframes confetti-fall {
+  0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+
+/* =============================================
+   CONFETTI OVERLAY (for cake)
+   ============================================= */
+.confetti-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 800;
+  overflow: hidden;
+}
+
+/* =============================================
+   OVERLAY / DIMMER
+   ============================================= */
+.overlay-dim {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 400;
+  display: none;
+}
+.overlay-dim.visible { display: block; }
+
+/* =============================================
+   SECTION TRANSITION ANIMATION
+   ============================================= */
+@keyframes slide-in {
+  0% { opacity: 0; transform: translateY(30px) scale(0.97); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.screen.active .game-card,
+.screen.active .main-title,
+.screen.active .subtitle {
+  animation: slide-in 0.5s ease-out both;
+}
+
+/* =============================================
+   RESPONSIVE TWEAKS
+   ============================================= */
+@media (max-width: 400px) {
+  .gifts-grid { gap: 10px; }
+  .gift-box { font-size: 44px; }
+}
+</style>
+</head>
+<body>
+
+<!-- =============================================
+     PROGRESS BAR
+     ============================================= -->
+<div class="progress-bar-wrap">
+  <div class="progress-bar-fill" id="progress-bar" style="width:0%"></div>
+</div>
+
+<!-- =============================================
+     OVERLAY DIMMER (for popups)
+     ============================================= -->
+<div class="overlay-dim" id="overlay-dim"></div>
+
+<!-- =============================================
+     SCREEN 0: WELCOME
+     ============================================= -->
+<div class="screen active" id="screen-welcome">
+  <!-- Floating decorations -->
+  <span class="floating-decor" style="top:8%;left:5%;animation-delay:0s">🎀</span>
+  <span class="floating-decor" style="top:15%;right:6%;animation-delay:0.5s">⭐</span>
+  <span class="floating-decor" style="bottom:20%;left:8%;animation-delay:1s">🌸</span>
+  <span class="floating-decor" style="bottom:30%;right:5%;animation-delay:1.5s">🌟</span>
+  <span class="floating-decor" style="top:40%;left:2%;animation-delay:0.8s">🎊</span>
+  <span class="floating-decor" style="top:55%;right:3%;animation-delay:1.2s">🎉</span>
+
+  <span class="panda-mascot">🐼</span>
+  <h1 class="main-title">Happy Birthday<br>HIMU 🎉</h1>
+  <p class="subtitle">An interactive birthday adventure awaits you!</p>
+  <p style="color:#9B59B6;font-size:clamp(0.85rem,3vw,1rem);margin-bottom:24px;font-weight:600;">7 mini games to unlock your special day ✨</p>
+  <button class="btn btn-primary" onclick="startAdventure()">🎮 Start Adventure!</button>
+</div>
+
+<!-- =============================================
+     SCREEN 1: BUTTERFLY CATCH
+     ============================================= -->
+<div class="screen" id="screen-butterfly">
+  <div class="game-card">
+    <div class="game-title">🦋 Butterfly Catch!</div>
+    <div class="game-desc">Tap all the butterflies to continue! They're fast!</div>
+    <div class="counter" id="butterfly-counter">Caught: 0 / 10</div>
+    <div id="butterfly-arena"></div>
+    <p style="color:#9B59B6;font-size:0.85rem;font-weight:600;">Quick — tap those fluttery friends!</p>
+  </div>
+</div>
+
+<!-- =============================================
+     SCREEN 2: POP BALLOONS
+     ============================================= -->
+<div class="screen" id="screen-balloon">
+  <div class="game-card">
+    <div class="game-title">🎈 Pop the Balloons!</div>
+    <div class="game-desc">Pop the balloons — some hold surprises!</div>
+    <div class="counter" id="balloon-counter">Popped: 0 / 8</div>
+    <div id="balloon-arena"></div>
+    <div id="balloon-surprise" style="font-size:1.1rem;font-weight:700;color:#FF6B9D;min-height:30px;margin-top:6px;"></div>
+  </div>
+</div>
+
+<!-- =============================================
+     SCREEN 3: BIRTHDAY CAKE
+     ============================================= -->
+<div class="screen" id="screen-cake">
+  <div class="game-card">
+    <div class="game-title">🎂 Make a Wish!</div>
+    <div class="game-desc">Blow out the candles and make your birthday wish!</div>
+    <div class="cake-display" id="cake-emoji">🎂</div>
+    <div class="candles-row" id="candles-row">
+      <span class="candle" data-i="0">🕯️</span>
+      <span class="candle" data-i="1">🕯️</span>
+      <span class="candle" data-i="2">🕯️</span>
+      <span class="candle" data-i="3">🕯️</span>
+      <span class="candle" data-i="4">🕯️</span>
+    </div>
+    <button class="btn btn-primary" id="blow-btn" onclick="blowCandles()">💨 Blow the Candles!</button>
+    <div id="cake-msg" style="margin-top:14px;font-size:1.1rem;font-weight:700;color:#A855F7;min-height:32px;"></div>
+  </div>
+</div>
+
+<!-- =============================================
+     SCREEN 4: MYSTERY GIFTS (UPGRADED)
+     ============================================= -->
+<div class="screen" id="screen-gifts">
+  <div class="game-card">
+    <div class="game-title">🎁 Mystery Gifts!</div>
+    <div class="game-desc">Open every gift — can you find the golden one? ✨</div>
+    <div class="gifts-stage-label" id="gifts-stage-label">Stage 1 of 2 — Open all gifts!</div>
+    <!-- Progress dots -->
+    <div class="gift-dots" id="gift-dots">
+      <div class="gift-dot"></div>
+      <div class="gift-dot"></div>
+      <div class="gift-dot"></div>
+      <div class="gift-dot"></div>
+      <div class="gift-dot"></div>
+    </div>
+    <div class="gifts-grid" id="gifts-grid"></div>
+    <div id="gifts-hint" style="font-size:0.88rem;color:#B07FD4;font-weight:600;min-height:22px;margin-top:4px;"></div>
+  </div>
+  <!-- Gift reveal popup (upgraded) -->
+  <div class="gift-reveal" id="gift-reveal">
+    <span class="gift-reveal-emoji" id="gift-reveal-emoji">🎁</span>
+    <div class="gift-reveal-msg" id="gift-reveal-content"></div>
+    <div class="gift-hint" id="gift-reveal-hint"></div>
+    <button class="btn btn-primary" style="margin-top:16px;font-size:0.95rem;padding:11px 26px;" onclick="closeGiftReveal()">Yay! 🎉</button>
+  </div>
+</div>
+
+<!-- =============================================
+     SCREEN 5 (was 6): SECRET LETTERS
+     ============================================= -->
+<div class="screen" id="screen-letters">
+  <div class="game-card">
+    <div class="game-title">💌 Secret Letters!</div>
+    <div class="game-desc">Find and open all the hidden birthday messages!</div>
+    <div class="counter" id="letters-counter">Found: 0 / 6</div>
+    <div id="letters-arena"></div>
+  </div>
+  <!-- Letter popup -->
+  <div class="letter-popup" id="letter-popup">
+    <div id="letter-content"></div>
+    <button class="btn btn-primary" style="margin-top:12px;font-size:0.9rem;padding:9px 22px;" onclick="closeLetter()">💛 Aww!</button>
+  </div>
+</div>
+
+<!-- =============================================
+     SCREEN 7: SPIN THE WHEEL
+     ============================================= -->
+<div class="screen" id="screen-wheel">
+  <div class="game-card">
+    <div class="game-title">🎡 Spin the Wheel!</div>
+    <div class="game-desc">Spin for your birthday destiny!</div>
+    <div class="wheel-wrap">
+      <div class="wheel-pointer">👇</div>
+      <canvas id="spin-canvas" width="300" height="300"></canvas>
+    </div>
+    <div class="wheel-result" id="wheel-result">Spin to reveal your surprise!</div>
+    <button class="btn btn-primary" id="spin-btn" onclick="spinWheel()">🌀 Spin!</button>
+    <div id="wheel-spins-left" style="font-size:0.85rem;color:#9B59B6;font-weight:600;margin-top:8px;">Spins: 0 / 3</div>
+  </div>
+</div>
+
+<!-- =============================================
+     SCREEN 8: PANDA FEEDING
+     ============================================= -->
+<div class="screen" id="screen-panda">
+  <div class="game-card">
+    <div class="game-title">🐼 Feed the Panda!</div>
+    <div class="game-desc">Click food items to feed our hungry panda friend!</div>
+    <span class="panda-feed-char" id="panda-char">🐼</span>
+    <div class="hunger-bar-wrap">
+      <div class="hunger-bar" id="hunger-bar" style="width:0%"></div>
+    </div>
+    <div id="hunger-label" style="font-size:0.9rem;color:#9B59B6;font-weight:700;margin-bottom:10px;">Hunger: 0%</div>
+    <div class="food-items" id="food-items">
+      <span class="food-item" onclick="feedPanda(this, '🍪', 20)">🍪</span>
+      <span class="food-item" onclick="feedPanda(this, '🎂', 30)">🎂</span>
+      <span class="food-item" onclick="feedPanda(this, '🍓', 15)">🍓</span>
+      <span class="food-item" onclick="feedPanda(this, '🍡', 25)">🍡</span>
+      <span class="food-item" onclick="feedPanda(this, '🍰', 30)">🍰</span>
+    </div>
+    <div id="panda-msg" style="font-size:1rem;font-weight:700;color:#FF6B9D;min-height:28px;margin-top:8px;"></div>
+  </div>
+</div>
+
+<!-- =============================================
+     SCREEN: VINTAGE LETTER (before final)
+     ============================================= -->
+<div class="screen" id="screen-letter">
+  <div class="letter-paper" style="margin-top:20px;margin-bottom:20px;">
+    <!-- Decorative flowers -->
+    <span class="letter-flowers" style="top:8px;left:10px;">🌸</span>
+    <span class="letter-flowers" style="bottom:12px;left:14px;">🌼</span>
+    <span class="letter-flowers" style="bottom:10px;right:10px;">🌷</span>
+
+    <!-- Margin rule -->
+    <div class="letter-margin-line"></div>
+
+    <!-- Stamp + postmark -->
+    <div class="letter-stamp">📮</div>
+    <div class="letter-postmark">HAPPY<br>BIRTH<br>DAY<br>✦ 2025 ✦</div>
+
+    <!-- Heading -->
+    <div class="letter-divider">· · · · · · · · · ·</div>
+    <div class="letter-heading">A Letter For You, Himu 💌</div>
+    <div class="letter-divider">· · · · · · · · · ·</div>
+
+    <!-- Body -->
+    <div class="letter-body">
+      <p>My dearest Himu,</p>
+
+      <p>Where does one even find the right words for someone like you? Today, on this most special of days, I find myself reaching for every beautiful word I know — and still coming up short. So let me simply say what my heart feels most truly:</p>
+
+      <p><strong>Thank you for being born.</strong> The world is an immeasurably warmer, kinder, and more radiant place because you are in it. Your very existence is a gift — not just to the people who love you, but to every soul fortunate enough to cross your path. 🌸</p>
+
+      <p>You are beautiful, Himu — and I mean that in every way a person can be. Yes, you carry a grace that is impossible to ignore, a smile that could soften the hardest of days, and eyes that hold so much warmth and life. But your truest beauty lives in your heart — in the way you love deeply, care genuinely, and show up for the people who matter to you. That is rare. That is you. 💛</p>
+
+      <p>And I want you to know — I know, with every ounce of certainty I have, that you are going to be the most brilliant doctor. You will heal people not just with medicine, but with that incredible soul of yours. Every dream you carry, every goal you have set your heart upon — you will achieve each and every one of them. I have no doubt. 🩺✨</p>
+
+      <p>And through every exam, every late night, every triumph and every hard day — I am right here, by your side. Always. That is a promise. 🤝</p>
+
+      <p>May this birthday be the beginning of your most magnificent year yet. May it bring you laughter that fills your lungs, adventures that widen your eyes, and moments so beautiful they take your breath clean away. You deserve every single good thing life has to offer. 🦋🎂</p>
+    </div>
+
+    <!-- Divider -->
+    <div class="letter-divider" style="margin-top:18px;">— ✦ —</div>
+
+    <!-- Sign-off -->
+    <div class="letter-sign">
+      With all the love in the world,<br>
+      Your Birthday Crew 🐼🦋🎂
+    </div>
+
+    <!-- Wax seal -->
+    <span class="letter-wax-seal">🔴</span>
+  </div>
+
+  <button class="btn btn-primary letter-continue-btn" onclick="nextScreen('letter')">
+    🎉 To the Grand Finale!
+  </button>
+</div>
+
+<!-- =============================================
+     SCREEN FINAL: CELEBRATION (REDESIGNED)
+     ============================================= -->
+<div class="screen" id="screen-final">
+  <canvas id="fireworks-canvas"></canvas>
+
+  <!-- Twinkling background stars -->
+  <div id="final-stars"></div>
+
+  <div class="final-content">
+    <span class="final-panda">🐼</span>
+    <h1 class="final-title">Happy Birthday<br>Himu! 🎉</h1>
+
+    <div class="final-emoji-row">
+      <span>🎂</span><span>🦋</span><span>🌸</span><span>✨</span><span>🎈</span>
+    </div>
+
+    <div class="final-card">
+      <p class="final-wish">
+        You've reached the end of your birthday adventure! 🥳<br><br>
+        May this year bring you joy beyond measure, dreams turned into reality, and every happiness your heart desires.<br><br>
+        <strong style="color:#FFB3C6;">The world is yours, Himu. 🌍💖</strong>
+      </p>
+    </div>
+
+    <div class="final-emoji-row" style="margin-top:16px;">
+      <span>🎊</span><span>💫</span><span>🌟</span><span>💕</span><span>🎀</span>
+    </div>
+
+    <button class="final-replay" onclick="restartAdventure()">🔄 Play Again!</button>
+  </div>
+</div>
+
+<!-- =============================================
+     CONFETTI CONTAINER
+     ============================================= -->
+<div class="confetti-overlay" id="confetti-overlay"></div>
+
+<script>
+/* =============================================
+   STATE MANAGEMENT
+   ============================================= */
+const state = {
+  currentScreen: 'welcome',
+  butterflyCaught: 0,
+  balloonsPopped: 0,
+  candlesBlown: false,
+  giftsOpened: 0,
+  giftsStage: 1,
+  giftsRevealedCount: 0,
+  lettersFound: 0,
+  wheelSpins: 0,
+  panderHunger: 0,
+};
+
+const TOTAL_SCREENS = 9; // welcome + 8 games
+let currentScreenIndex = 0;
+
+/* =============================================
+   SCREEN NAVIGATION
+   ============================================= */
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + id).classList.add('active');
+  state.currentScreen = id;
+
+  const screenOrder = ['welcome','butterfly','balloon','cake','gifts','letters','wheel','panda','letter','final'];
+  const idx = screenOrder.indexOf(id);
+  const pct = idx / (screenOrder.length - 1) * 100;
+  document.getElementById('progress-bar').style.width = pct + '%';
+
+  if (id === 'butterfly') initButterflies();
+  if (id === 'balloon') initBalloons();
+  if (id === 'wheel') drawWheel();
+  if (id === 'gifts') initGifts();
+  if (id === 'letters') initLetters();
+  if (id === 'final') startFinalCelebration();
+}
+
+function startAdventure() { showScreen('butterfly'); }
+
+function nextScreen(current) {
+  const order = ['butterfly','balloon','cake','gifts','letters','wheel','panda','letter','final'];
+  const idx = order.indexOf(current);
+  if (idx < order.length - 1) showScreen(order[idx + 1]);
+}
+
+function restartAdventure() {
+  Object.assign(state, {
+    butterflyCaught: 0, balloonsPopped: 0, candlesBlown: false,
+    giftsOpened: 0, giftsStage: 1, giftsRevealedCount: 0,
+    lettersFound: 0, wheelSpins: 0, panderHunger: 0,
+  });
+  // Reset candles
+  document.querySelectorAll('.candle').forEach(c => {
+    c.classList.remove('out'); c.style.opacity=''; c.textContent='🕯️';
+  });
+  document.getElementById('blow-btn').disabled = false;
+  document.getElementById('blow-btn').textContent = '💨 Blow the Candles!';
+  document.getElementById('cake-msg').textContent = '';
+  stopFireworks();
+  showScreen('welcome');
+}
+
+/* =============================================
+   GAME 1: BUTTERFLY CATCH
+   ============================================= */
+let butterflyInterval = null;
+const butterflyEmojis = ['🦋', '🌸', '🦋', '🌺', '🦋'];
+
+function initButterflies() {
+  state.butterflyCaught = 0;
+  document.getElementById('butterfly-counter').textContent = 'Caught: 0 / 10';
+  const arena = document.getElementById('butterfly-arena');
+  arena.innerHTML = '';
+
+  if (butterflyInterval) clearInterval(butterflyInterval);
+
+  // Spawn butterflies continuously
+  let total = 0;
+  function spawnButterfly() {
+    if (state.butterflyCaught >= 10) return;
+    if (arena.querySelectorAll('.butterfly').length >= 6) return;
+    total++;
+    const bf = document.createElement('span');
+    bf.className = 'butterfly';
+    bf.textContent = butterflyEmojis[Math.floor(Math.random() * butterflyEmojis.length)];
+    bf.style.left = (5 + Math.random() * 82) + '%';
+    bf.style.top = (5 + Math.random() * 80) + '%';
+
+    // Animate across screen
+    const dx = (Math.random() - 0.5) * 200;
+    const dy = (Math.random() - 0.5) * 200;
+    bf.style.transition = `left ${2 + Math.random() * 3}s ease-in-out, top ${2 + Math.random() * 3}s ease-in-out`;
+
+    bf.onclick = function(e) {
+      e.stopPropagation();
+      catchButterfly(bf, e);
+    };
+    arena.appendChild(bf);
+
+    // Move butterfly
+    setTimeout(() => {
+      bf.style.left = (5 + Math.random() * 82) + '%';
+      bf.style.top = (5 + Math.random() * 80) + '%';
+    }, 100);
+  }
+
+  // Spawn initial batch
+  for (let i = 0; i < 5; i++) setTimeout(spawnButterfly, i * 300);
+  butterflyInterval = setInterval(spawnButterfly, 1200);
+}
+
+function catchButterfly(el, e) {
+  if (state.butterflyCaught >= 10) return;
+  state.butterflyCaught++;
+
+  // Flash effect
+  const arena = el.parentElement;
+  const rect = arena.getBoundingClientRect();
+  const flash = document.createElement('span');
+  flash.className = 'catch-flash';
+  flash.textContent = '✨';
+  flash.style.left = el.style.left;
+  flash.style.top = el.style.top;
+  arena.appendChild(flash);
+  setTimeout(() => flash.remove(), 700);
+
+  el.remove();
+  document.getElementById('butterfly-counter').textContent = `Caught: ${state.butterflyCaught} / 10`;
+
+  if (state.butterflyCaught >= 10) {
+    clearInterval(butterflyInterval);
+    setTimeout(() => {
+      showCelebration('🦋 Amazing! You caught all 10 butterflies!', () => nextScreen('butterfly'));
+    }, 500);
+  }
+}
+
+/* =============================================
+   GAME 2: POP BALLOONS
+   ============================================= */
+let balloonInterval = null;
+const balloonColors = ['🎈', '🟥', '🟦', '🟩', '🟨', '🟪'];
+const balloonSurprises = [
+  { emoji: '🎁', msg: 'A surprise gift for you!' },
+  { emoji: '🌟', msg: 'You\'re a star, HIMU!' },
+  { emoji: '🍰', msg: 'Birthday cake incoming!' },
+  { emoji: '💖', msg: 'So much love for you!' },
+  { emoji: '🎊', msg: 'Party time!' },
+];
+
+const balloonDisplay = ['🎈', '🎈', '🎈', '🎈', '🎈', '🎈', '🎈', '🎈'];
+const isSpecial = [false, true, false, false, true, false, true, false];
+
+function initBalloons() {
+  state.balloonsPopped = 0;
+  document.getElementById('balloon-counter').textContent = 'Popped: 0 / 8';
+  document.getElementById('balloon-surprise').textContent = '';
+  const arena = document.getElementById('balloon-arena');
+  arena.innerHTML = '';
+
+  if (balloonInterval) clearInterval(balloonInterval);
+
+  let spawned = 0;
+  function spawnBalloon() {
+    if (spawned >= 30 && state.balloonsPopped < 8) return; // keep spawning
+    spawned++;
+    const special = Math.random() < 0.3;
+    const balloon = document.createElement('span');
+    balloon.className = 'balloon';
+    balloon.textContent = special ? ['🎊', '💫', '⭐'][Math.floor(Math.random() * 3)] : '🎈';
+    balloon.style.left = (5 + Math.random() * 85) + '%';
+    balloon.dataset.special = special ? '1' : '0';
+
+    const duration = 3 + Math.random() * 4;
+    balloon.style.animationDuration = duration + 's';
+    balloon.style.animationName = 'rise';
+
+    balloon.onclick = function() {
+      popBalloon(balloon, special);
+    };
+
+    balloon.addEventListener('animationend', () => balloon.remove());
+    arena.appendChild(balloon);
+  }
+
+  for (let i = 0; i < 4; i++) setTimeout(spawnBalloon, i * 400);
+  balloonInterval = setInterval(spawnBalloon, 900);
+}
+
+function popBalloon(el, isSpecial) {
+  if (state.balloonsPopped >= 8) return;
+  state.balloonsPopped++;
+
+  // Pop flash
+  const arena = el.parentElement;
+  const pop = document.createElement('span');
+  pop.className = 'balloon-pop';
+  pop.textContent = isSpecial ? '🌟' : '💥';
+  pop.style.left = el.style.left;
+  pop.style.bottom = el.style.bottom || '30%';
+  arena.appendChild(pop);
+  setTimeout(() => pop.remove(), 800);
+
+  el.remove();
+  document.getElementById('balloon-counter').textContent = `Popped: ${state.balloonsPopped} / 8`;
+
+  if (isSpecial) {
+    const surp = balloonSurprises[Math.floor(Math.random() * balloonSurprises.length)];
+    document.getElementById('balloon-surprise').textContent = `${surp.emoji} ${surp.msg}`;
+  }
+
+  if (state.balloonsPopped >= 8) {
+    clearInterval(balloonInterval);
+    setTimeout(() => {
+      showCelebration('🎈 Balloon popper extraordinaire!', () => nextScreen('balloon'));
+    }, 600);
+  }
+}
+
+/* =============================================
+   GAME 3: BIRTHDAY CAKE
+   ============================================= */
+function blowCandles() {
+  if (state.candlesBlown) return;
+  state.candlesBlown = true;
+
+  document.getElementById('blow-btn').disabled = true;
+  document.getElementById('blow-btn').textContent = '💨 Blowing...';
+
+  const candles = document.querySelectorAll('.candle');
+  candles.forEach((c, i) => {
+    setTimeout(() => {
+      c.classList.add('out');
+      c.textContent = '🕯️';
+      c.style.opacity = '0.5';
+    }, i * 300);
+  });
+
+  setTimeout(() => {
+    document.getElementById('cake-msg').textContent = '🎂 Wish made! Your wish will come true! ✨';
+    document.getElementById('cake-emoji').textContent = '🎂';
+    spawnConfetti(60);
+    setTimeout(() => {
+      showCelebration('🎂 Your birthday wish was made!', () => nextScreen('cake'));
+    }, 2000);
+  }, candles.length * 300 + 400);
+}
+
+/* =============================================
+   GAME 4: MYSTERY GIFTS (UPGRADED)
+   Two stages:
+   Stage 1 — open all 5 regular gifts
+   Stage 2 — find the 1 hidden golden gift among 5 re-shuffled boxes
+   ============================================= */
+
+const GIFT_EMOJIS_FRONT = ['🎁', '🎀', '📦', '🎊', '🛍️'];
+
+const GIFT_REVEALS = [
+  { emoji: '💝', msg: 'A heart overflowing with love — just for you, HIMU!', hint: '' },
+  { emoji: '🌈', msg: 'May every day ahead shine rainbow-bright!', hint: '' },
+  { emoji: '🌺', msg: 'Beautiful flowers to match your beautiful soul!', hint: '' },
+  { emoji: '🎵', msg: 'A birthday melody playing in your honour! 🎶', hint: '' },
+  { emoji: '🍭', msg: 'Life is sweet — and so are you!', hint: '' },
+];
+
+const GOLDEN_REVEAL = {
+  emoji: '🏆',
+  msg: 'THE GOLDEN GIFT! You found the treasure, HIMU!',
+  hint: '✨ This unlocks your next adventure!',
+};
+
+// Decoy messages for stage 2 non-golden gifts
+const DECOY_MSGS = [
+  { emoji: '🪄', msg: 'Oops — just a magic wand! Keep looking...' },
+  { emoji: '🦄', msg: 'A unicorn! But not the golden one... try again!' },
+  { emoji: '🍀', msg: 'Lucky clover! The golden gift is still hiding...' },
+  { emoji: '🎭', msg: 'A party mask — cute, but not golden!' },
+];
+
+let giftsGoldIndex = -1;
+let giftsStage2Opened = 0;
+
+function initGifts() {
+  state.giftsOpened = 0;
+  state.giftsStage = 1;
+  giftsStage2Opened = 0;
+  state.giftsRevealedCount = 0;
+  document.getElementById('gifts-hint').textContent = '🎁 Click each gift to unwrap it!';
+  document.getElementById('gifts-stage-label').textContent = 'Stage 1 of 2 — Open all gifts!';
+  buildGiftsStage1();
+  updateGiftDots(0);
+}
+
+function buildGiftsStage1() {
+  const grid = document.getElementById('gifts-grid');
+  grid.innerHTML = '';
+  GIFT_EMOJIS_FRONT.forEach((emoji, i) => {
+    const card = document.createElement('div');
+    card.className = 'gift-card';
+    card.innerHTML = `
+      <div class="gift-inner">
+        <div class="gift-front">${emoji}</div>
+        <div class="gift-back">${GIFT_REVEALS[i].emoji}</div>
+      </div>`;
+    card.onclick = () => openGift(card, i, false);
+    // Staggered entrance shake hint
+    setTimeout(() => {
+      card.classList.add('shaking');
+      setTimeout(() => card.classList.remove('shaking'), 650);
+    }, 400 + i * 180);
+    grid.appendChild(card);
+  });
+}
+
+function buildGiftsStage2() {
+  state.giftsStage = 2;
+  giftsStage2Opened = 0;
+  giftsGoldIndex = Math.floor(Math.random() * 5);
+  document.getElementById('gifts-stage-label').textContent = '🏆 Stage 2 of 2 — Find the Golden Gift!';
+  document.getElementById('gifts-hint').textContent = '⭐ One of these hides pure gold — can you find it?';
+  updateGiftDots(0);
+
+  const grid = document.getElementById('gifts-grid');
+  grid.innerHTML = '';
+
+  const decoyPool = [...DECOY_MSGS];
+  let decoyIdx = 0;
+
+  for (let i = 0; i < 5; i++) {
+    const isGolden = (i === giftsGoldIndex);
+    const card = document.createElement('div');
+    card.className = 'gift-card' + (isGolden ? ' golden' : '');
+    card.innerHTML = `
+      <div class="gift-inner">
+        <div class="gift-front">${isGolden ? '🌟' : '🎁'}</div>
+        <div class="gift-back">${isGolden ? '🏆' : decoyPool[decoyIdx % decoyPool.length].emoji}</div>
+      </div>`;
+    if (!isGolden) {
+      const decoy = decoyPool[decoyIdx % decoyPool.length];
+      card.dataset.decoyMsg = decoy.msg;
+      card.dataset.decoyEmoji = decoy.emoji;
+      decoyIdx++;
+    }
+    card.onclick = () => openGift(card, i, isGolden);
+    setTimeout(() => {
+      card.classList.add('shaking');
+      setTimeout(() => card.classList.remove('shaking'), 650);
+    }, 300 + i * 200);
+    grid.appendChild(card);
+  }
+}
+
+function openGift(card, idx, isGolden) {
+  if (card.classList.contains('opened')) return;
+  card.classList.add('opened');
+
+  // Sparkle burst from card center
+  const rect = card.getBoundingClientRect();
+  const cx = rect.left + rect.width / 2;
+  const cy = rect.top + rect.height / 2;
+  spawnGiftSparkles(cx, cy, isGolden);
+
+  if (state.giftsStage === 1) {
+    state.giftsOpened++;
+    updateGiftDots(state.giftsOpened);
+    showGiftReveal(
+      GIFT_REVEALS[idx].emoji,
+      GIFT_REVEALS[idx].msg,
+      '',
+      () => {
+        if (state.giftsOpened >= 5) {
+          // Brief pause then transition to stage 2
+          setTimeout(() => {
+            spawnConfetti(30);
+            document.getElementById('gifts-hint').textContent = '🌟 Amazing! Now find the golden gift!';
+            setTimeout(buildGiftsStage2, 900);
+          }, 200);
+        }
+      }
+    );
+  } else {
+    // Stage 2
+    if (isGolden) {
+      showGiftReveal(GOLDEN_REVEAL.emoji, GOLDEN_REVEAL.msg, GOLDEN_REVEAL.hint, () => {
+        spawnConfetti(60);
+        setTimeout(() => {
+          showCelebration('🏆 Golden Gift found! You\'re amazing, HIMU!', () => nextScreen('gifts'));
+        }, 600);
+      });
+    } else {
+      giftsStage2Opened++;
+      const msg = card.dataset.decoyMsg || 'Not golden... keep trying!';
+      const emoji = card.dataset.decoyEmoji || '😅';
+      // Shake remaining cards as a hint
+      setTimeout(() => {
+        document.querySelectorAll('.gift-card:not(.opened)').forEach(c => {
+          c.classList.add('shaking');
+          setTimeout(() => c.classList.remove('shaking'), 650);
+        });
+      }, 400);
+      showGiftReveal(emoji, msg, `${5 - giftsStage2Opened - 1 > 0 ? (5 - giftsStage2Opened - 1) + ' gifts left!' : 'Almost there!'}`, () => {});
+    }
+  }
+}
+
+function spawnGiftSparkles(cx, cy, golden) {
+  const colors = golden
+    ? ['#FFD700','#FF8C00','#FFF0A0','#FFBF00']
+    : ['#FF6B9D','#A855F7','#3B82F6','#22C55E','#FFB3C6'];
+  for (let i = 0; i < 14; i++) {
+    const s = document.createElement('div');
+    s.className = 'gift-sparkle';
+    const angle = (i / 14) * 2 * Math.PI;
+    const dist = 40 + Math.random() * 60;
+    s.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+    s.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+    s.style.left = cx + 'px';
+    s.style.top = cy + 'px';
+    s.style.background = colors[i % colors.length];
+    s.style.animationDuration = (0.6 + Math.random() * 0.4) + 's';
+    document.body.appendChild(s);
+    setTimeout(() => s.remove(), 1200);
+  }
+}
+
+function showGiftReveal(emoji, msg, hint, onClose) {
+  document.getElementById('gift-reveal-emoji').textContent = emoji;
+  document.getElementById('gift-reveal-content').textContent = msg;
+  document.getElementById('gift-reveal-hint').textContent = hint;
+  document.getElementById('gift-reveal').classList.add('visible');
+  document.getElementById('overlay-dim').classList.add('visible');
+  // Store callback
+  document.getElementById('gift-reveal').dataset.cb = '';
+  window._giftRevealCb = onClose;
+}
+
+function closeGiftReveal() {
+  document.getElementById('gift-reveal').classList.remove('visible');
+  document.getElementById('overlay-dim').classList.remove('visible');
+  if (typeof window._giftRevealCb === 'function') {
+    const cb = window._giftRevealCb;
+    window._giftRevealCb = null;
+    setTimeout(cb, 200);
+  }
+}
+
+function updateGiftDots(filled) {
+  const dots = document.querySelectorAll('.gift-dot');
+  dots.forEach((d, i) => {
+    d.classList.toggle('filled', i < filled);
+  });
+}
+
+/* =============================================
+   GAME 5 (was 6): SECRET LETTERS
+   ============================================= */
+const birthdayMessages = [
+  '🌟 You light up every room you enter, HIMU!',
+  '🦋 May your birthday be as magical as you are!',
+  '🎂 Wishing you endless joy and yummy cake!',
+  '🐼 The world is a better place with you in it!',
+  '🌈 Here\'s to another amazing year ahead!',
+  '💖 You are loved more than you know, HIMU!',
+];
+
+function initLetters() {
+  state.lettersFound = 0;
+  document.getElementById('letters-counter').textContent = 'Found: 0 / 6';
+  const arena = document.getElementById('letters-arena');
+  arena.innerHTML = '';
+
+  const positions = [
+    { left: '8%', top: '10%' }, { left: '60%', top: '5%' },
+    { left: '30%', top: '45%' }, { left: '75%', top: '50%' },
+    { left: '15%', top: '65%' }, { left: '55%', top: '70%' },
+  ];
+
+  positions.forEach((pos, i) => {
+    const env = document.createElement('span');
+    env.className = 'envelope';
+    env.textContent = '💌';
+    env.style.left = pos.left;
+    env.style.top = pos.top;
+    env.style.animationDelay = (i * 0.4) + 's';
+    env.dataset.idx = i;
+    env.onclick = () => openLetter(env, i);
+    arena.appendChild(env);
+  });
+}
+
+function openLetter(el, idx) {
+  if (el.classList.contains('opened')) return;
+  el.classList.add('opened');
+  state.lettersFound++;
+  document.getElementById('letters-counter').textContent = `Found: ${state.lettersFound} / 6`;
+
+  document.getElementById('letter-content').textContent = birthdayMessages[idx];
+  document.getElementById('letter-popup').classList.add('visible');
+  document.getElementById('overlay-dim').classList.add('visible');
+}
+
+function closeLetter() {
+  document.getElementById('letter-popup').classList.remove('visible');
+  document.getElementById('overlay-dim').classList.remove('visible');
+
+  if (state.lettersFound >= 6) {
+    setTimeout(() => {
+      showCelebration('💌 All secret messages found!', () => nextScreen('letters'));
+    }, 400);
+  }
+}
+
+/* =============================================
+   GAME 7: SPIN THE WHEEL
+   ============================================= */
+const WHEEL_SEGMENTS = [
+  { label: 'New Dress 👗', color: '#FFB3C6', msg: 'A gorgeous new dress just for you! 👗✨' },
+  { label: 'Trip ✈️',      color: '#B3D9FF', msg: 'A dream trip to wherever your heart wants! ✈️🌍' },
+  { label: 'Spa Day 💆',   color: '#B8F0DC', msg: 'A full luxury spa day — you deserve it! 💆‍♀️🌸' },
+  { label: 'Jewellery 💍', color: '#FFE082', msg: 'Sparkling jewellery as bright as you! 💍✨' },
+  { label: 'Concert 🎤',   color: '#C8B8FF', msg: 'Front-row tickets to your fave artist! 🎤🎶' },
+  { label: 'Photoshoot 📸',color: '#FFCBA4', msg: 'A stunning birthday photoshoot! 📸🌟' },
+];
+
+let wheelRotation = 0;
+let isSpinning = false;
+
+function drawWheel(rotation = 0) {
+  const canvas = document.getElementById('spin-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const size = canvas.width;
+  const cx = size / 2, cy = size / 2, r = cx - 6;
+  const n = WHEEL_SEGMENTS.length;
+  const sliceAngle = (2 * Math.PI) / n;
+  // Offset so segment 0 starts at top (-PI/2)
+  const baseOffset = -Math.PI / 2;
+
+  ctx.clearRect(0, 0, size, size);
+
+  WHEEL_SEGMENTS.forEach((seg, i) => {
+    const startAngle = baseOffset + rotation + i * sliceAngle;
+    const endAngle   = startAngle + sliceAngle;
+    const midAngle   = startAngle + sliceAngle / 2;
+
+    // Slice
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, r, startAngle, endAngle);
+    ctx.closePath();
+    ctx.fillStyle = seg.color;
+    ctx.fill();
+    ctx.strokeStyle = 'white';
+    ctx.lineWidth = 3;
+    ctx.stroke();
+
+    // Label — positioned along midAngle, reading outward
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(midAngle);
+    ctx.textAlign = 'right';
+    ctx.font = `bold ${size > 250 ? 12 : 10}px Nunito, sans-serif`;
+    ctx.fillStyle = '#4A2070';
+    ctx.fillText(seg.label, r - 10, 5);
+    ctx.restore();
+  });
+
+  // Center circle
+  ctx.beginPath();
+  ctx.arc(cx, cy, 22, 0, 2 * Math.PI);
+  ctx.fillStyle = '#A855F7';
+  ctx.fill();
+  ctx.strokeStyle = 'white';
+  ctx.lineWidth = 3;
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(cx, cy, 10, 0, 2 * Math.PI);
+  ctx.fillStyle = 'white';
+  ctx.fill();
+}
+
+function spinWheel() {
+  if (isSpinning) return;
+  if (state.wheelSpins >= 3) {
+    nextScreen('wheel');
+    return;
+  }
+  isSpinning = true;
+  document.getElementById('spin-btn').disabled = true;
+  document.getElementById('wheel-result').textContent = '🌀 Spinning...';
+
+  const extraSpins = 6 + Math.random() * 4;                     // full rotations
+  const targetRotation = wheelRotation + extraSpins * 2 * Math.PI;
+  const duration = 3500;
+  const startTime = performance.now();
+  const startRot = wheelRotation;
+
+  function animate(now) {
+    const elapsed = now - startTime;
+    const t = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - t, 4);                       // ease-out quart
+    const current = startRot + (targetRotation - startRot) * eased;
+    drawWheel(current);
+
+    if (t < 1) {
+      requestAnimationFrame(animate);
+    } else {
+      // Normalise rotation to [0, 2π)
+      wheelRotation = targetRotation % (2 * Math.PI);
+      isSpinning = false;
+
+      /* ---- Winner detection ----
+         The pointer is at the top (angle -π/2 in canvas coords).
+         With our baseOffset of -π/2 baked in, segment i occupies
+         angles:  rotation + i*slice  to  rotation + (i+1)*slice
+         The pointer is at canvas angle 0 relative to our offset,
+         i.e. at wheel-local angle 0.
+         So we need: which segment contains angle 0?
+         That is simply:  floor( (-wheelRotation % 2π + 2π) % 2π / sliceAngle )
+      */
+      const n = WHEEL_SEGMENTS.length;
+      const sliceAngle = (2 * Math.PI) / n;
+      const normalised = ((-wheelRotation % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+      const idx = Math.floor(normalised / sliceAngle) % n;
+      const result = WHEEL_SEGMENTS[idx];
+
+      document.getElementById('wheel-result').innerHTML =
+        `<span style="font-size:1.1em">${result.label}</span><br><span style="font-size:0.75em;opacity:0.85">${result.msg}</span>`;
+      state.wheelSpins++;
+      document.getElementById('wheel-spins-left').textContent = `Spins: ${state.wheelSpins} / 3`;
+      spawnConfetti(20);
+
+      document.getElementById('spin-btn').disabled = false;
+      if (state.wheelSpins >= 3) {
+        document.getElementById('spin-btn').textContent = '💌 Continue!';
+        document.getElementById('spin-btn').onclick = () => nextScreen('wheel');
+      }
+    }
+  }
+  requestAnimationFrame(animate);
+}
+
+/* =============================================
+   GAME 8: PANDA FEEDING
+   ============================================= */
+const pandaMoods = ['', '😊 Yum!', '😄 Delicious!', '😁 More please!', '🥰 So tasty!'];
+
+function feedPanda(el, food, amount) {
+  if (state.panderHunger >= 100) return;
+  el.classList.add('eaten');
+  state.panderHunger = Math.min(100, state.panderHunger + amount);
+
+  const bar = document.getElementById('hunger-bar');
+  bar.style.width = state.panderHunger + '%';
+  document.getElementById('hunger-label').textContent = `Hunger: ${state.panderHunger}%`;
+
+  const panda = document.getElementById('panda-char');
+  panda.classList.remove('happy');
+  void panda.offsetWidth; // reflow
+  panda.classList.add('happy');
+
+  if (state.panderHunger < 40) document.getElementById('panda-msg').textContent = '🐼 Yum! Feed me more!';
+  else if (state.panderHunger < 80) document.getElementById('panda-msg').textContent = '🐼 Getting full... keep going!';
+  else if (state.panderHunger < 100) document.getElementById('panda-msg').textContent = '🐼 Almost full!';
+
+  // Respawn food after eating
+  setTimeout(() => {
+    el.classList.remove('eaten');
+    if (state.panderHunger < 100) {
+      el.style.opacity = '1';
+      el.style.transform = '';
+    }
+  }, 2000);
+
+  if (state.panderHunger >= 100) {
+    document.getElementById('panda-msg').textContent = '🐼 I\'m full and happy! THANK YOU! 🥰';
+    panda.textContent = '🐼';
+    spawnConfetti(50);
+    setTimeout(() => {
+      showCelebration('🐼 Panda is so happy and full!', () => nextScreen('panda'));
+    }, 2000);
+  }
+}
+
+/* =============================================
+   FINAL CELEBRATION: FIREWORKS
+   ============================================= */
+let fireworksAnimId = null;
+let fireworksParticles = [];
+
+function startFinalCelebration() {
+  const canvas = document.getElementById('fireworks-canvas');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  const ctx = canvas.getContext('2d');
+
+  fireworksParticles = [];
+  spawnConfetti(80);
+
+  // Create twinkling background stars
+  const starsEl = document.getElementById('final-stars');
+  starsEl.innerHTML = '';
+  for (let i = 0; i < 40; i++) {
+    const s = document.createElement('div');
+    s.className = 'final-star';
+    const size = 2 + Math.random() * 4;
+    s.style.cssText = `
+      width:${size}px; height:${size}px;
+      left:${Math.random()*100}vw; top:${Math.random()*100}vh;
+      background: hsl(${Math.random()*60+280},80%,80%);
+      animation-duration: ${1 + Math.random() * 2}s;
+      animation-delay: ${Math.random() * 2}s;
+      position:absolute; z-index:2;
+    `;
+    starsEl.appendChild(s);
+  }
+
+  function spawnFirework() {
+    const x = 80 + Math.random() * (canvas.width - 160);
+    const y = 60 + Math.random() * (canvas.height * 0.55);
+    const hue = Math.random() * 360;
+    const count = 70 + Math.floor(Math.random() * 40);
+    for (let i = 0; i < count; i++) {
+      const angle = (i / count) * 2 * Math.PI;
+      const speed = 1.5 + Math.random() * 5;
+      fireworksParticles.push({
+        x, y,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        color: `hsl(${hue + Math.random()*40 - 20}, 90%, 65%)`,
+        alpha: 1,
+        size: 2.5 + Math.random() * 3,
+        life: 0.012 + Math.random() * 0.01,
+      });
+    }
+  }
+
+  let lastSpawn = 0;
+  function drawFireworks(ts) {
+    ctx.fillStyle = 'rgba(15, 5, 30, 0.15)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    if (ts - lastSpawn > 700) { spawnFirework(); lastSpawn = ts; }
+
+    fireworksParticles = fireworksParticles.filter(p => p.alpha > 0.02);
+    fireworksParticles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      p.vy += 0.055; p.vx *= 0.985;
+      p.alpha -= p.life;
+      ctx.globalAlpha = p.alpha;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, 2 * Math.PI);
+      ctx.fillStyle = p.color;
+      ctx.fill();
+    });
+
+    ctx.globalAlpha = 1;
+    fireworksAnimId = requestAnimationFrame(drawFireworks);
+  }
+
+  if (fireworksAnimId) cancelAnimationFrame(fireworksAnimId);
+  fireworksAnimId = requestAnimationFrame(drawFireworks);
+
+  const onResize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
+  window.addEventListener('resize', onResize);
+}
+
+function stopFireworks() {
+  if (fireworksAnimId) {
+    cancelAnimationFrame(fireworksAnimId);
+    fireworksAnimId = null;
+  }
+}
+
+/* =============================================
+   CONFETTI
+   ============================================= */
+const confettiColors = ['#FF6B9D', '#A855F7', '#3B82F6', '#22C55E', '#F59E0B', '#FFB3C6', '#C8B8FF'];
+
+function spawnConfetti(count) {
+  const container = document.getElementById('confetti-overlay');
+  for (let i = 0; i < count; i++) {
+    setTimeout(() => {
+      const piece = document.createElement('div');
+      piece.className = 'confetti-piece';
+      piece.style.left = Math.random() * 100 + 'vw';
+      piece.style.top = '-20px';
+      piece.style.background = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+      piece.style.width = (6 + Math.random() * 8) + 'px';
+      piece.style.height = (6 + Math.random() * 8) + 'px';
+      piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+      piece.style.animationDuration = (2 + Math.random() * 3) + 's';
+      piece.style.animationDelay = (Math.random() * 0.5) + 's';
+      container.appendChild(piece);
+      setTimeout(() => piece.remove(), 6000);
+    }, i * 30);
+  }
+}
+
+/* =============================================
+   CELEBRATION POPUP (between stages)
+   ============================================= */
+function showCelebration(msg, callback) {
+  // Quick overlay celebration
+  const el = document.createElement('div');
+  el.style.cssText = `
+    position: fixed; top: 50%; left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: linear-gradient(135deg, #FF6B9D, #A855F7);
+    color: white; padding: 28px 36px; border-radius: 24px;
+    font-family: 'Fredoka One', cursive; font-size: clamp(1.1rem, 4vw, 1.4rem);
+    text-align: center; z-index: 900; max-width: 320px;
+    box-shadow: 0 16px 50px rgba(168,85,247,0.5);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  `;
+  el.innerHTML = `<div style="font-size:2rem;margin-bottom:10px">🎉</div>${msg}<br><button onclick="this.parentElement.remove()" style="
+    margin-top:16px; font-family:'Fredoka One',cursive; font-size:1rem;
+    padding:10px 28px; border:none; border-radius:50px;
+    background:rgba(255,255,255,0.3); color:white; cursor:pointer;
+  ">Continue! →</button>`;
+  document.body.appendChild(el);
+
+  setTimeout(() => el.style.transform = 'translate(-50%, -50%) scale(1)', 50);
+  el.querySelector('button').onclick = () => {
+    el.style.transform = 'translate(-50%, -50%) scale(0)';
+    setTimeout(() => { el.remove(); callback(); }, 300);
+  };
+  spawnConfetti(25);
+}
+
+/* =============================================
+   INIT
+   ============================================= */
+// Touch support improvements
+document.addEventListener('touchstart', function() {}, { passive: true });
+
+// Prevent double-tap zoom on game elements
+document.addEventListener('dblclick', function(e) {
+  if (e.target.classList.contains('butterfly') ||
+      e.target.classList.contains('balloon') ||
+      e.target.classList.contains('gift-box')) {
+    e.preventDefault();
+  }
+}, { passive: false });
+
+console.log('🎉 Happy Birthday HIMU! Adventure ready!');
+</script>
+</body>
+</html>
